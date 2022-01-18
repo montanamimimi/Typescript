@@ -9,15 +9,16 @@ function collectSearchData(e) {
     // Короче код который дальше мог бы работать, если бы не вот это все:
 
     e.preventDefault();
-    const checkIn = (<HTMLInputElement>document.getElementById('check-in-date')).value;
-    const checkOut = (<HTMLInputElement>document.getElementById('check-out-date')).value;
-    const price = (<HTMLInputElement>document.getElementById('max-price')).value;
+    // const checkIn = (<HTMLInputElement>document.getElementById('check-in-date')).value;
+    // const checkOut = (<HTMLInputElement>document.getElementById('check-out-date')).value;
+    // const price = (<HTMLInputElement>document.getElementById('max-price')).value;
    
     // дальше собственно провести приведение типов к Date и number
 
-    const startDate: Date = new Date(checkIn);
-    const finishDate: Date = new Date(checkOut);
-    const maxPrice: number = +price; // по хорошему еще проверку на то что получилось именно число
+    // const startDate: Date = new Date(checkIn);
+    // const finishDate: Date = new Date(checkOut);
+    // const maxPrice: number = +price; 
+    // по хорошему еще проверку на то что получилось именно число
     // но очень неудобно все этот тестить пока код по факту не работает. 
     // так что в функцию поиска передаю какую-то фигню. 
     const letsSearch: SearchFormData = {
