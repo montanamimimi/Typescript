@@ -1,4 +1,37 @@
 import { renderBlock } from './lib.js'
+import { SearchFormData } from './search-interface'
+
+function collectSearchData(e) {
+
+    // Эта штука неработает. Это вообще законно?  
+    // onsubmit срабатывает при первой загрузке и не срабатывает на submit. Весь код перечитала - не понимаю почему. 
+    // Это может быть связано с Live Server? 
+    // Короче код который дальше мог бы работать, если бы не вот это все:
+
+    e.preventDefault();
+    const checkIn = (<HTMLInputElement>document.getElementById('check-in-date')).value;
+    const checkOut = (<HTMLInputElement>document.getElementById('check-out-date')).value;
+    const price = (<HTMLInputElement>document.getElementById('max-price')).value;
+   
+    // дальше собственно провести приведение типов к Date и number
+
+    const startDate: Date = new Date(checkIn);
+    const finishDate: Date = new Date(checkOut);
+    const maxPrice: number = +price; // по хорошему еще проверку на то что получилось именно число
+    // но очень неудобно все этот тестить пока код по факту не работает. 
+    // так что в функцию поиска передаю какую-то фигню. 
+    const letsSearch: SearchFormData = {
+    startDate: new Date(), // startDate
+    finishDate: new Date(), // finishDate
+    maxPrice: 1000 // maxPrice
+  }
+  search(letsSearch);
+} 
+
+function search (searchData: SearchFormData) {
+  console.log(searchData);
+}
+
 
 export function getTomorrow():Date {
   let today = new Date()
@@ -25,11 +58,11 @@ export function renderSearchFormBlock (startDate:Date, finishDate:Date) {
   let finish = convertDate(finishDate)
   let tomorrow = convertDate(getTomorrow())
   let lastDayNextMonth = convertDate(getLastDayNextMonth())
-
+  
   renderBlock(
     'search-form-block',
     `
-    <form>
+    <form onsubmit="${collectSearchData(event)}">
       <fieldset class="search-filedset">
         <div class="row">
           <div>
@@ -56,7 +89,7 @@ export function renderSearchFormBlock (startDate:Date, finishDate:Date) {
             <input id="max-price" type="text" value="" name="price" class="max-price" />
           </div>
           <div>
-            <div><button>Найти</button></div>
+            <div><button type="submit">Найти</button></div>
           </div>
         </div>
       </fieldset>
