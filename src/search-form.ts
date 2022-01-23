@@ -1,41 +1,30 @@
 import { renderBlock } from './lib.js'
-import { SearchFormData } from './search-interface'
+import { SearchFormData } from './search-interface.js'
 import { getTomorrow, getLastDayNextMonth, convertDate } from './date-utils.js'
- 
+import { FlatRentSdk } from './flat-rent-sdk.js'
+import { renderSearchResultsBlock } from './search-results.js'
+
 function collectSearchData(e) {
 
-    // Эта штука неработает. Это вообще законно?  
-    // onsubmit срабатывает при первой загрузке и не срабатывает на submit. Весь код перечитала - не понимаю почему. 
-    // Это может быть связано с Live Server? 
-    // Короче код который дальше мог бы работать, если бы не вот это все:
-
     e.preventDefault();
-    // const checkIn = (<HTMLInputElement>document.getElementById('check-in-date')).value;
-    // const checkOut = (<HTMLInputElement>document.getElementById('check-out-date')).value;
-    // const price = (<HTMLInputElement>document.getElementById('max-price')).value;
+    const checkIn = (<HTMLInputElement>document.getElementById('check-in-date')).value;
+    const checkOut = (<HTMLInputElement>document.getElementById('check-out-date')).value;
+    const price = (<HTMLInputElement>document.getElementById('max-price')).value;
    
-    // дальше собственно провести приведение типов к Date и number
+    const startDate: Date = new Date(checkIn);
+    const finishDate: Date = new Date(checkOut);
+    const maxPrice: number = +price; 
 
-    // const startDate: Date = new Date(checkIn);
-    // const finishDate: Date = new Date(checkOut);
-    // const maxPrice: number = +price; 
-    // по хорошему еще проверку на то что получилось именно число
-    // но очень неудобно все этот тестить пока код по факту не работает. 
-    // так что в функцию поиска передаю какую-то фигню. 
     const letsSearch: SearchFormData = {
-    startDate: new Date(), // startDate
-    finishDate: new Date(), // finishDate
-    maxPrice: 1000 // maxPrice
-  }
-  search(letsSearch);
+    city: 'Санкт-Петербург',
+    checkInDate: startDate,
+    checkOutDate: finishDate,
+    priceLimit: maxPrice
+    }
+    const newSearch = new FlatRentSdk()
+    const results = newSearch.search(letsSearch)
+    results.then(resolve => renderSearchResultsBlock(resolve))    
 } 
-
-function search (searchData: SearchFormData) {
-  console.log(searchData);
-}
-
-
-
 
 export function renderSearchFormBlock (startDate:Date, finishDate:Date) {
 
@@ -47,7 +36,7 @@ export function renderSearchFormBlock (startDate:Date, finishDate:Date) {
   renderBlock(
     'search-form-block',
     `
-    <form onsubmit="${collectSearchData(event)}">
+    <form class="searchform">
       <fieldset class="search-filedset">
         <div class="row">
           <div>
@@ -81,4 +70,7 @@ export function renderSearchFormBlock (startDate:Date, finishDate:Date) {
     </form>
     `
   )
+
+  const form = document.querySelector('.searchform')
+  form.addEventListener('submit', collectSearchData)
 }
