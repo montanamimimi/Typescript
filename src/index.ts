@@ -19,7 +19,15 @@ let startDate = getTomorrow();
 let finishDate = getLastDayNextMonth();
 
 const myAmount = localStorage.getItem('favoritesAmount');
-const myUser = JSON.parse(localStorage.getItem('user'));
+const userInfo = localStorage.getItem('user');
+
+const myUser = { username: '', userAvatar: ''}
+
+if (userInfo) {
+  const parse = JSON.parse(userInfo)
+  myUser.username = parse.username
+  myUser.userAvatar = parse.avatar
+}
 
 const checkedUser = getUserData(myUser.username, myUser.userAvatar);
 const checkedAmount = getFavoritesAmount(myAmount);

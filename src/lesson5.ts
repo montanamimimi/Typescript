@@ -18,7 +18,7 @@ export class MyGraphicsPrimitive2D {
 } 
 
 export class MyAreaPrimitive2D extends MyGraphicsPrimitive2D {
-    private _square: number;
+    private _square!: number;
     
     constructor (x: number,y: number, height: number, width: number) {
         super(x, y, height, width)
@@ -35,8 +35,8 @@ export class MyAreaPrimitive2D extends MyGraphicsPrimitive2D {
 }
 
 export class MyCircle extends MyAreaPrimitive2D {
-    private _center: number[]
-    private _radius: number
+    private _center!: number[]
+    private _radius!: number
 
     constructor(x: number,y: number, height: number, width: number){
         super(x, y, height, width)
@@ -63,8 +63,8 @@ export class MyCircle extends MyAreaPrimitive2D {
 
 
 export class MyRectangle extends MyAreaPrimitive2D {
-    private _leftBorder: number[]
-    private _rightBorder: number[]
+    private _leftBorder!: number[]
+    private _rightBorder!: number[]
 
     constructor(x: number,y: number, height: number, width: number){
         super(x, y, height, width)

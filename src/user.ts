@@ -16,7 +16,10 @@ export function getUserData(username: unknown, userAvatar: unknown) {
 
 export function getFavoritesAmount(favoritesAmount: unknown) {
   let checkedAmount: number = 0;
-  favoritesAmount = +favoritesAmount;
+  if (typeof favoritesAmount === "string") {
+    favoritesAmount = +favoritesAmount;
+  }
+
   if (typeof favoritesAmount === "number") {
     checkedAmount = favoritesAmount;
   }  

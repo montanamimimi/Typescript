@@ -13,7 +13,7 @@ export function renderSearchStubBlock () {
   )
 }
 
-export function renderEmptyOrErrorSearchBlock (reasonMessage) {
+export function renderEmptyOrErrorSearchBlock (reasonMessage: any) {
   renderBlock(
     'search-results-block',
     `
@@ -25,11 +25,11 @@ export function renderEmptyOrErrorSearchBlock (reasonMessage) {
   )
 }
 
-export function bookNumber(result) {
+export function bookNumber(result: any) {
   console.log(result)
 }
 
-export function renderSearchResultsBlock (results: SearchFormResults[]) {
+export function renderSearchResultsBlock (results: SearchFormResults[] | null ) {
   renderBlock(
     'search-results-block',
     `
@@ -44,9 +44,9 @@ export function renderSearchResultsBlock (results: SearchFormResults[]) {
             </select>
         </div>
     </div>
-    <ul class="results-list">
-      ${       
-        results.map(result => {     
+    <ul class="results-list">    
+      ${
+        results?.map(result => {     
         return `<li class="result">
         <div class="result-container">
           <div class="result-img-container">
