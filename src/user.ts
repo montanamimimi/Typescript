@@ -1,6 +1,29 @@
 import { renderBlock } from './lib.js'
 
-export function renderUserBlock (userName:string, userPicture:string, favoriteItemsAmount:number) {
+export function getUserData(username: unknown, userAvatar: unknown) {
+  let checkedUser = {
+    username: 'Not set ',
+    userAvatar: 'avatar.png'
+  }
+  if (typeof username === "string") {
+    checkedUser.username = username;
+  }
+  if (typeof userAvatar === "string") {
+    checkedUser.userAvatar = userAvatar;
+  }  
+  return checkedUser
+}
+
+export function getFavoritesAmount(favoritesAmount: unknown) {
+  let checkedAmount: number = 0;
+  favoritesAmount = +favoritesAmount;
+  if (typeof favoritesAmount === "number") {
+    checkedAmount = favoritesAmount;
+  }  
+  return checkedAmount
+}
+
+export function renderUserBlock (userName:string, userPicture:string, favoriteItemsAmount?:number) {
   const favoritesCaption = favoriteItemsAmount ? favoriteItemsAmount : 'ничего нет'
   const hasFavoriteItems = favoriteItemsAmount ? true : false
 
