@@ -19,5 +19,8 @@
     "@typescript-eslint/parser": "^5.9.1",
     "eslint": "^8.6.0",
     "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "google-books-search": "^0.3.1"
   }
 }

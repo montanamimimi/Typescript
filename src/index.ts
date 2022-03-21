@@ -3,7 +3,7 @@ import { getTomorrow, getLastDayNextMonth } from './date-utils.js'
 import { renderSearchStubBlock } from './search-results.js'
 import { renderUserBlock, getUserData, getFavoritesAmount } from './user.js'
 import { renderToast } from './lib.js'
-import { getTodosByCount } from './todos.js'
+// import { getTodosByCount } from './todos.js'
 
 let startDate = getTomorrow();
 let finishDate = getLastDayNextMonth();
@@ -24,4 +24,4 @@ window.addEventListener('DOMContentLoaded', () => {
   )
 })
 
-getTodosByCount(10);
+// getTodosByCount(10);
