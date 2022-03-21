@@ -7,6 +7,9 @@ export interface Todo {
 
 const allTodos: Map<number, Todo> = new Map<number, Todo>()
 
+function instanceOfTodo(object: any): object is Todo {
+    return object
+}
 
 function getNumber(list: Map<number, Todo>, num: number) {
 
@@ -15,8 +18,13 @@ function getNumber(list: Map<number, Todo>, num: number) {
     if ( num <= 0 ) {
         return 'You have no todos'
     } else {
-        for (let i = 1; (i <= num) && (i <= list.size); i++) {
-            myNum.push(list.get(i))
+        for (let i:number = 1; (i <= num) && (i <= list.size); i++) {
+            const newItem = list.get(i)
+
+            if (instanceOfTodo(newItem)){
+                myNum.push(newItem)
+            }
+            
         }
     }  
 
@@ -27,7 +35,7 @@ function getNumber(list: Map<number, Todo>, num: number) {
 }
 
 
-export function getTodosByCount(counter) {
+export function getTodosByCount(counter:number) {
     fetch('https://jsonplaceholder.typicode.com/todos')
         .then(response => response.text())
         .then<Todo[]>((responseText) => {

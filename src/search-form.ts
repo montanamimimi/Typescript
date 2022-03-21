@@ -4,7 +4,7 @@ import { getTomorrow, getLastDayNextMonth, convertDate } from './date-utils.js'
 import { FlatRentSdk } from './flat-rent-sdk.js'
 import { renderSearchResultsBlock } from './search-results.js'
 
-function collectSearchData(e) {
+function collectSearchData(e: any) {
 
     e.preventDefault();
     const checkIn = (<HTMLInputElement>document.getElementById('check-in-date')).value;
@@ -72,5 +72,7 @@ export function renderSearchFormBlock (startDate:Date, finishDate:Date) {
   )
 
   const form = document.querySelector('.searchform')
-  form.addEventListener('submit', collectSearchData)
+  if (form) {
+    form.addEventListener('submit', collectSearchData)
+  } 
 }
