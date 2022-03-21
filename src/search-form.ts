@@ -1,6 +1,7 @@
 import { renderBlock } from './lib.js'
 import { SearchFormData } from './search-interface'
-
+import { getTomorrow, getLastDayNextMonth, convertDate } from './date-utils.js'
+ 
 function collectSearchData(e) {
 
     // Эта штука неработает. Это вообще законно?  
@@ -34,24 +35,7 @@ function search (searchData: SearchFormData) {
 }
 
 
-export function getTomorrow():Date {
-  let today = new Date()
-  let tomorrow = new Date(today)
-  tomorrow.setDate(today.getDate() + 1)
-  return tomorrow
-}
 
-export function getLastDayNextMonth():Date {
-  let today = new Date()
-  let month = today.getMonth()
-  let year = today.getFullYear()
-  let day = new Date(year, month + 2, 0)
-  return day;
-}
-
-function convertDate(date:Date):string {
-  return date.toISOString().slice(0, 10)
-}
 
 export function renderSearchFormBlock (startDate:Date, finishDate:Date) {
 
