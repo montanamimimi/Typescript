@@ -3,7 +3,17 @@ import { getTomorrow, getLastDayNextMonth } from './date-utils.js'
 import { renderSearchStubBlock } from './search-results.js'
 import { renderUserBlock, getUserData, getFavoritesAmount } from './user.js'
 import { renderToast } from './lib.js'
+
 // import { getTodosByCount } from './todos.js'
+
+// For lesson 5 tests
+import { MyGraphicsPrimitive2D, MyAreaPrimitive2D, MyCircle } from './lesson5.js'
+
+const my2D = new MyCircle(0,0,100,100);
+my2D.move(20, -10)
+console.log(my2D.getRadius(), my2D.getCenter())
+
+// Finish lesson 5 tests
 
 let startDate = getTomorrow();
 let finishDate = getLastDayNextMonth();
